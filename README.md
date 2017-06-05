@@ -98,3 +98,62 @@ window.addEventListener("load",function(){
     }
  <button>提交中</button>
 
+/**
+*显示隐藏地3种方式
+*/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button></button>
+    <br/>
+    <img src=" " alt="">
+    <script type="text/javascript">
+    var btn=document.querySelector("button");
+    var img=document.querySelector("img");
+        // 常规
+        btn.addEventListener("click",function(){
+            if(img.style.display=="none"){
+                img.style.display="block";
+            }else{
+                img.style.display="none";
+            } ;
+        });
+
+
+        //三元
+        btn.addEventListener("click",function(){
+            img.style.display=(img.style.display=="none")?"block":"none";
+        });   
+
+
+        //布尔型变量的切换
+        var b=true;
+        btn.addEventListener("click",function(){
+            if(b){
+                img.style.display="none";
+                b=false;
+            }else{
+                img.style.display="block";
+                b=true;
+            } ;
+        });
+
+
+        //switch
+        btn.addEventListener("click",function(){
+            switch(img.style.display){
+                case "":
+                img.style.display="none";
+                break;
+                case "none":
+                img.style.display="";
+                break;
+            };
+        });
+    </script>
+</body>
+</html>
