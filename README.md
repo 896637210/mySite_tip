@@ -59,4 +59,41 @@ window.addEventListener("load",function(){
  window.addEventListener("resize",function(){
 
  })
- 
+ <button>提交中</button>
+<style type="text/css">
+    button{
+        width:150px;
+        background: green;
+    }
+    button:after{
+        content:"";
+        display:inline-block;
+        width:5px;
+        height:5px;
+        /*border:1px solid #fff;*/
+        border-radius:5px;
+        /*box-shadow: 8px 0 #fff,16px 0 #fff,24px 0 #fff;*/
+        animation: dotting infinite 3s step-start;
+    }
+    @keyframes dotting{
+        0%{
+            box-shadow:none;
+        }
+        30%{
+            box-shadow:none;
+        }
+        50%{
+            box-shadow: 8px 0 #fff;
+        }
+        70%{
+            box-shadow: 8px 0 #fff,16px 0 #fff;
+        }
+        90%{
+            box-shadow: 8px 0 #fff,16px 0 #fff,24px 0 #fff;
+        }
+        100%{
+            box-shadow: 8px 0 #fff,16px 0 #fff,24px 0 #fff;
+        }
+    }
+</style>
+
