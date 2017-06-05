@@ -59,9 +59,10 @@ window.addEventListener("load",function(){
  window.addEventListener("resize",function(){
 
  })
- <button>提交中</button>
-<style type="text/css">
-    button{
+/**
+*小得读取按钮样式
+*/
+    button{
         width:150px;
         background: green;
     }
@@ -95,5 +96,5 @@ window.addEventListener("load",function(){
             box-shadow: 8px 0 #fff,16px 0 #fff,24px 0 #fff;
         }
     }
-</style>
+ <button>提交中</button>
 
