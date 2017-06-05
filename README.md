@@ -287,7 +287,7 @@ for(var i=0;i<lis.length;i++){
 </body>
 </html>
 /**
-*pattern
+*pattern 清除空格
 */
 <!--
 清除空格
@@ -308,6 +308,145 @@ function trim(value){
     }
     return value;
 }
+
+/**
+*简单input验证
+*/
+/**
+*注册
+*/
+        /*保存错误信息*/
+        var errorMsg=null;
+        /*处理密码强度*/
+        pwd.addEventListener("keyup",function(){
+            switch (valide_pwd(trim(this.value))) {
+                case 3:
+                    feedback.innerHTML="密码强度低";
+                    errorMsg="密码强度低";
+                    break;
+                case 2:
+                    feedback.innerHTML="密码强度中";
+                    errorMsg="密码强度中";
+                    break;
+                case 1:
+                    feedback.innerHTML="密码强度较高";
+                    errorMsg="密码强度较高";
+                    break;
+                case 0:
+                    feedback.innerHTML="密码强度高";
+                    errorMsg="";
+                    break;
+                default:
+                    // statements_def
+                    break;
+            }
+        })
+        /*用户名失去焦点时的验证*/
+        username.addEventListener("blur",function(){
+            //如果用户名为空
+            if(trim(this.value).length==0){
+                feedback.innerHTML="用户名不得为空";
+                errorMsg="用户名不得为空";
+            }else{
+                //如果用户名不为空，就执行ajax验证
+                xhr.open("post","member.txt");
+                xhr.send(null);
+                xhr.addEventListener("readystatechange",function(){
+                    if(xhr.readyState==4){
+                        if(xhr.status==200){
+                            if(trim(username.value)==xhr.responseText){
+                                feedback.innerHTML="用户名已经存在";
+                                errorMsg="用户名已经存在";
+                            }else{
+                                errorMsg="";
+                            }
+                            //console.log(xhr.responseText);
+                        }
+                    }
+                })
+                ///////////////
+            }
+        });
+        /*用户名获得焦点时的验证*/
+        username.addEventListener("focus",function(){
+            feedback.innerHTML=errorMsg="";
+        })
+        /*检测邮箱格式*/
+        email.addEventListener("keyup",function(){
+            if(!valide_email(trim(this.value))){
+                feedback.innerHTML="邮箱格式不正确";
+                errorMsg="邮箱格式不正确";
+                return false;
+            }else{
+                feedback.innerHTML="";
+                errorMsg=false;
+            }
+        });
+        /*点击提交按钮*/
+        regBtn.addEventListener("click",function(){
+            /*判断用户名不得为空*/
+            if(trim(username.value).length==0){
+                feedback.innerHTML="用户名不得为空";
+                return false;
+            }else{
+                xhr.open("post","member.txt");
+                xhr.send(null);
+                xhr.addEventListener("readystatechange",function(){
+                    if(xhr.readyState==4){
+                        if(xhr.status==200){
+                            if(trim(username.value)==xhr.responseText){
+                                feedback.innerHTML="用户名已经存在";
+                                errorMsg="用户名已经存在";
+                            }else{
+                                errorMsg="";
+                            }
+                            //console.log(xhr.responseText);
+                        }
+                    }
+                })
+            }
+            /*密码不得为空*/
+            if(trim(pwd.value).length==0){
+                feedback.innerHTML="密码不得为空";
+                return false;
+            }else{
+                if(valide_pwd(pwd.value)!=0){
+                    feedback.innerHTML="密码强度不够";
+                    return false;
+                }else{
+                    /*两次密码必须一致*/
+                    if(trim(pwd.value)!=trim(repwd.value)){
+                        feedback.innerHTML="两次密码不一致";
+                        return false;
+                    }
+                    /**/
+                    if(trim(email.value).length==0){
+                        feedback.innerHTML="邮箱不得为空";
+                        return false;
+                    }
+                }
+            }
+            /*验证不通过*/
+            if(errorMsg){
+                feedback.innerHTML=errorMsg;
+                return false;
+            }
+            //alert(username.value);
+            //把合法的用户名保存到sessionStorage中
+            sessionStorage.setItem("username",username.value);
+            location.href='login3.html';
+
+        })
+        ////禁止用户粘贴密码////////////
+        repwd.addEventListener("paste",function(evt){
+            evt.preventDefault();
+        });
+
+
+
+
+
+
 
 
 
