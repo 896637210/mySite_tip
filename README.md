@@ -157,3 +157,14 @@ window.addEventListener("load",function(){
     </script>
 </body>
 </html>
+
+/**
+*异步  同步  默认时事件
+*/
+stopPropagation()：阻止事件传递（ie下有差异）
+preventDefault();阻止默认动作（ie下有差异）
+
+
+
+async 异步
+defer加载
