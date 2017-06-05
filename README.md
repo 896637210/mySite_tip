@@ -168,3 +168,150 @@ preventDefault();阻止默认动作（ie下有差异）
 
 async 异步
 defer加载
+
+/**
+*tab基础
+*/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+            list-style: none;
+        }
+        .tab{
+
+        }
+        .tab ul{
+
+        }
+        .tab ul:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .tab ul li{
+            float: left;
+            width: 100px;
+            height: 50px;
+            border: 1px solid #ddd;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .tab ul li.active{
+            position: relative;
+            top: 5px;
+            z-index: 10;
+            border: 1px solid green;
+            border-bottom: 0;
+            background: #fff;
+        }
+        .tab div{
+            height: 200px;
+            border: 1px solid green;
+            display: none;
+        }
+        div.spotlight{
+            display: block;
+            position: relative;
+            z-index: 9;
+            top: 3px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="spotlight"></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script type="text/javascript">
+var lis=document.querySelectorAll(".tab ul li");
+var divs=document.querySelectorAll(".tab div");
+//forEach
+lis.forEach(function(v,i){
+    v.addEventListener("click",function(){
+        //第一步清除所有元素的active;
+        lis.forEach(function(v,i){
+        v.className="";
+        divs[i].className="";
+        });
+        //为当前的元素添加active;
+        v.className="active";
+        divs[i].className="spotlight";
+    });
+});
+
+
+//setAttribute,getAttribute()
+for(var i=0;i<lis.length;i++){
+       //循环为每个一个list添加index
+      lis[i].setAttribute("index",i);
+      lis[i].addEventListener("click",function(){
+          for(var j=0;j<lis.length;j++){
+              lis[j].className="";
+            divs[j].className="";
+         };
+    divs[this.getAttribute("index")].className="spotlight";
+      this.className="active";
+    });
+};
+
+
+//匿名函数的自触发
+for(var i=0;i<lis.length;i++){
+    //循环为每个一个list添加index
+    //匿名函数的自触发(形参)(实参)
+    (function(index){
+        lis[index].addEventListener("click",function(){
+            for(var j=0;j<lis.length;j++){
+                    lis[j].className="";
+                    divs[j].className="";
+            } ;
+            divs[index].className="spotlight";
+            this.className="active";
+        });
+    })(i);
+};
+    </script>
+</body>
+</html>
+/**
+*pattern
+*/
+<!--
+清除空格
+ -->
+
+var demo=document.querySelector(".demo");
+var str="  a ";
+var pattern=/^\s*$/;
+demo.addEventListener("keyup",function(){
+    trim(this.value);
+});
+trim(" ");
+function trim(value){
+    if(/^\s*$/.test(value)){
+        value=value.replace(/^\s*$/,"");
+    }else if(/^\s*(.+?)\s*$/){
+        value=value.replace(/^\s*(.+?)\s*$/,"$1");
+    }
+    return value;
+}
+
+
+
+
+
+
+
