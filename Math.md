@@ -20,3 +20,25 @@ function accMul(arg1,arg2){
   return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)
 }
 ```
+### 判断 数组对象存在项 类型化数组转16进制
+```
+function inArray(arr, key, val) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i][key] === val) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// ArrayBuffer转16进度字符串示例
+function ab2hex(buffer) {
+  var hexArr = Array.prototype.map.call(
+    new Uint8Array(buffer),
+    function (bit) {
+      return ('00' + bit.toString(16)).slice(-2)
+    }
+  )
+  return hexArr.join(' ');
+}
+```
